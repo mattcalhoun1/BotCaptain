@@ -20,7 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.DrawStyle
+import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextMeasurer
@@ -47,14 +50,6 @@ class NavMapComponents {
             }
             Divider()
 
-            // map goes here
-            val boundaryData = ArrayList<PointF>()
-            val boundaries = botCaptainState.navMap.boundaries
-            boundaryData.add(PointF(boundaries.xmin, boundaries.ymin))
-            boundaryData.add(PointF(boundaries.xmax, boundaries.ymin))
-            boundaryData.add(PointF(boundaries.xmax, boundaries.ymax))
-            boundaryData.add(PointF(boundaries.xmin, boundaries.ymax))
-
             val pointsData = ArrayList<PointF> ()
             for (pl in botCaptainState.positionLog) {
                 pointsData.add(PointF(pl.positionX, pl.positionY))
@@ -66,7 +61,7 @@ class NavMapComponents {
             }
 
             if (pointsData.size > 0) {
-                LinearChart(boundaryData, pointsData, searchHitPoints, botCaptainState.navMap)
+                LinearChart(pointsData, searchHitPoints, botCaptainState.navMap)
             }
         }
     }
@@ -164,9 +159,10 @@ class NavMapComponents {
     @OptIn(ExperimentalTextApi::class)
     @Composable
     private fun LinearChart(
-        boundaryData: List<PointF>, pointsData: List<PointF>, searchHitPoints: List<PointF>, navMap: NavMap
+        pointsData: List<PointF>, searchHitPoints: List<PointF>, navMap: NavMap
     ) {
-        if (boundaryData.size == 0) return
+        val boundaryData = extractBoundaries(navMap)
+        if (boundaryData.isEmpty()) return
 
         Box(
             contentAlignment = Alignment.Center,
@@ -296,6 +292,58 @@ class NavMapComponents {
                     )
                 }
 
+                // draw landmarks
+                drawLandmarks(this, navMap = navMap, textMeasurer = textMeasurer)
+
+            }
+        }
+    }
+
+    @OptIn(ExperimentalTextApi::class)
+    private fun drawLandmarks (drawScope: DrawScope, navMap: NavMap, textMeasurer: TextMeasurer) {
+
+        for (lid in navMap.landmarks.keys) {
+            val l = navMap.landmarks[lid]
+            if (l != null) {
+                val boundaries = navMap.boundaries
+                var landmarkX = l.x
+                var landmarkY = l.y
+                var outOfBounds = false
+                // If the landmark is out of bounds, draw it right on the boundary, maybe hollow
+                if (l.x > boundaries.xmax) {
+                    outOfBounds = true
+                    landmarkX = boundaries.xmax
+                }
+                else if (l.x < boundaries.xmin) {
+                    outOfBounds = true
+                    landmarkX = boundaries.xmin
+                }
+                if (l.y > boundaries.ymax) {
+                    outOfBounds = true
+                    landmarkY = boundaries.ymax
+                }
+                else if (l.y < boundaries.ymin) {
+                    outOfBounds = true
+                    landmarkY = boundaries.ymin
+                }
+
+
+                Log.i("scale","Landmark at X ${l.x} , ${l.y}")
+                var drawStyle : DrawStyle = Stroke(5.0F)
+                if (l.lidarVisible) {
+                    drawStyle = Fill
+                }
+
+                drawScope.drawCircle(
+                    radius = 12.0f,
+                    center = Offset(
+                        x = CalculateX(landmarkX, landmarkY, drawScope.size.height, drawScope.size.width, navMap),
+                        y = CalculateY(landmarkX, landmarkY, drawScope.size.height, drawScope.size.width, navMap)
+                    ),
+                    color = Color(255, 228, 51),
+                    alpha = .3F + (.7F * (.1F * l.priority)), // higher priority get more opacity
+                    style = drawStyle
+                )
             }
         }
     }
@@ -327,4 +375,15 @@ class NavMapComponents {
         return height - scaledY
     }
 
+    private fun extractBoundaries (navMap: NavMap) : List<PointF> {
+        val boundaryData = ArrayList<PointF>()
+        val boundaries = navMap.boundaries
+        boundaryData.add(PointF(boundaries.xmin, boundaries.ymin))
+        boundaryData.add(PointF(boundaries.xmax, boundaries.ymin))
+        boundaryData.add(PointF(boundaries.xmax, boundaries.ymax))
+        boundaryData.add(PointF(boundaries.xmin, boundaries.ymax))
+        return boundaryData
+    }
+
 }
+

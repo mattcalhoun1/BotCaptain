@@ -8,5 +8,7 @@ data class Landmark (
     val y : Float,
     val height : Float,
     val altitude : Float,
-    val confidence : Float
+    val confidence : Float,
+    val priority : Int,
+    val lidarVisible: Boolean
 )
