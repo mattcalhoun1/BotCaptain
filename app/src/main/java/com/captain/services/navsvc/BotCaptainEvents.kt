@@ -364,7 +364,7 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                            for (v in state.positionViews.reversed()) {
                                if (v.cameraId.equals(c)) {
                                    // Grab this image and move on to the next camera
-                                   val imageResp = api.getPositionImage(v.vehicleId, v.entryNum, v.cameraId)
+                                   val imageResp = api.getPositionImage(v.vehicleId, v.entryNum, v.cameraId, v.cameraAngle)
                                    if (imageResp.isSuccessful()) {
                                        // rebuild the vehicle list
                                        if (imageResp.body() != null) {

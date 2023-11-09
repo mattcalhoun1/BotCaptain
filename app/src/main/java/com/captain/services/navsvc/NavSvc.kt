@@ -25,6 +25,9 @@ interface NavSvc {
     @GET("/position_view/{vehicleId}/{entryNum}/{cameraId}/")
     suspend fun getPositionImage (@Path("vehicleId") vehicleId :String, @Path("entryNum") entryNum : Long, @Path("cameraId") cameraId : String) : Response<PositionImage>
 
+    @GET("/position_view/{vehicleId}/{entryNum}/{cameraId}/{cameraAngle}")
+    suspend fun getPositionImage (@Path("vehicleId") vehicleId :String, @Path("entryNum") entryNum : Long, @Path("cameraId") cameraId : String, @Path("cameraAngle") cameraAngle : Float) : Response<PositionImage>
+
     @GET("/nav_map/{mapId}/")
     suspend fun getMap(@Path("mapId") mapId : String) : Response<NavMap>
 

@@ -74,16 +74,24 @@ class MainActivity : ComponentActivity() {
     // Triggers hiding of progress spinner upon next refresh
     fun hideProgressBar() {
         showProgressState = false
-        if (::showProgress.isInitialized) {
-            showProgress.value = false
+        try {
+            if (::showProgress.isInitialized) {
+                showProgress.value = false
+            }
+        } catch(ex : Exception) {
+            // can happen if app is waking up
         }
     }
 
     // triggers the progress spinner to show upon next refresh
     fun showProgressBar () {
         showProgressState = true
-        if (::showProgress.isInitialized) {
-            showProgress.value = true
+        try {
+            if (::showProgress.isInitialized) {
+                showProgress.value = true
+            }
+        } catch(ex : Exception) {
+            // can happen if app is waking up
         }
     }
 
