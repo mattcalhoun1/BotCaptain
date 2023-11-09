@@ -360,9 +360,9 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                     // If preload is turned on, pull latest image from each camera
                     state.positionImages.clear()
                     if (preloadPositionImages) {
-                        for (c in state.cameras) {
+                        //for (c in state.cameras) {
                            for (v in state.positionViews.reversed()) {
-                               if (v.cameraId.equals(c)) {
+                               //if (v.cameraId.equals(c)) {
                                    // Grab this image and move on to the next camera
                                    val imageResp = api.getPositionImage(v.vehicleId, v.entryNum, v.cameraId, v.cameraAngle)
                                    if (imageResp.isSuccessful()) {
@@ -370,12 +370,13 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                                        if (imageResp.body() != null) {
                                            state.newestLogEntry = getTimestampForEvent(v.entryNum)
                                            state.positionImages.add(imageResp.body()!!)
+                                           Log.i("Position Image", "Found image: Entry: ${v.entryNum}, Camera: ${v.cameraId}, Angle: ${v.cameraAngle}")
                                        }
                                    }
-                                   break // move on to the next camera
-                               }
+                                   //break // move on to the next camera
+                               //}
                            }
-                        }
+                        //}
 
                         // Pull search hits as well
                         val shResp = api.getSearchHits(state.selectedVehicle, state.selectedSession)

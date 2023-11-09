@@ -5,5 +5,5 @@ data class PositionImage (
     override val entryNum : Long,
     val vehicleId : String,
     override val cameraId : String,
-    override val encodedImage : String
-) : BotImage
+    override val encodedImage : String,
+    override val cameraAngle : Long) : BotImage

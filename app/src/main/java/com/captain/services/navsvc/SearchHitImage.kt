@@ -6,5 +6,6 @@ data class SearchHitImage (
     val mapId: String,
     override val imageFormat: String,
     override val encodedImage: String,
-    override val cameraId : String = "na"
+    override val cameraId : String = "na",
+    override val cameraAngle : Long
 ) : BotImage

@@ -23,8 +23,20 @@ import androidx.compose.ui.unit.Dp
 import com.captain.services.navsvc.SearchHitImage
 import com.captain.services.navsvc.BotCaptainEvents
 import com.captain.services.navsvc.BotCaptainState
+import com.captain.services.navsvc.PositionLogEntry
+import kotlin.math.roundToInt
 
 class BotViewComponents {
+    fun findPositionLogEntry(botCaptainState: BotCaptainState, entryNum: Long) : PositionLogEntry {
+        for (p in botCaptainState.positionLog) {
+            if (p.entryNum == entryNum) {
+                return p
+            }
+        }
+
+        return botCaptainState.positionLog[0]
+    }
+
     @Composable
     fun PositionViewContainer (botCaptainState: BotCaptainState, eventHandler: BotCaptainEvents) {
         val headerText =  remember { mutableStateOf(if (botCaptainState.newestLogEntry.equals(""))  "No Images Yet" else botCaptainState.newestLogEntry) }
@@ -43,14 +55,15 @@ class BotViewComponents {
                     items = botCaptainState.positionImages,
                     key = { img ->
                         // Return a stable + unique key for the item
-                        "${img::class.simpleName}.${img.entryNum}.${img.cameraId}"
+                        "${img::class.simpleName}.${img.entryNum}.${img.cameraId}.${img.cameraAngle}"
                     }
                 ) { img ->
                     val decodedHardcoded = Base64.decode(img.encodedImage,
                         Base64.DEFAULT)
                     val bitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(decodedHardcoded)).asImageBitmap()
+                    val entry  = findPositionLogEntry(botCaptainState = botCaptainState, entryNum = img.entryNum)
 
-                    var label : String = "Position (Cam: ${img.cameraId})"
+                    var label : String = "(${entry.positionX.roundToInt()},${entry.positionY.roundToInt()}) ${entry.heading.roundToInt()}º (Cam: ${img.cameraId}, ${img.cameraAngle})"
                     if (img is SearchHitImage) {
                         label = "Found ${(img as SearchHitImage).objectType}"
                     }
