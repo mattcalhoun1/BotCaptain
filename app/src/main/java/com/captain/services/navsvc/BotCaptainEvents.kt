@@ -361,6 +361,7 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                     state.positionImages.clear()
                     if (preloadPositionImages) {
                         //for (c in state.cameras) {
+                        var imageCount = 0
                            for (v in state.positionViews.reversed()) {
                                //if (v.cameraId.equals(c)) {
                                    // Grab this image and move on to the next camera
@@ -373,6 +374,11 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                                            Log.i("Position Image", "Found image: Entry: ${v.entryNum}, Camera: ${v.cameraId}, Angle: ${v.cameraAngle}")
                                        }
                                    }
+                               imageCount += 1
+                               // max 8 images
+                               if (imageCount >= 8) {
+                                   break
+                               }
                                    //break // move on to the next camera
                                //}
                            }
