@@ -348,7 +348,7 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                     for (v in response.body()!!) {
                         state.positionViews.add(v)
 
-                        if(!state.cameras.contains(v.cameraId)) {
+                        if (!state.cameras.contains(v.cameraId)) {
                             state.cameras.add(v.cameraId)
                         }
                         Log.i("api", "${v}")
@@ -360,30 +360,43 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                     // If preload is turned on, pull latest image from each camera
                     state.positionImages.clear()
                     if (preloadPositionImages) {
-                        //for (c in state.cameras) {
-                        var imageCount = 0
-                           for (v in state.positionViews.reversed()) {
-                               //if (v.cameraId.equals(c)) {
-                                   // Grab this image and move on to the next camera
-                                   val imageResp = api.getPositionImage(v.vehicleId, v.entryNum, v.cameraId, v.cameraAngle)
-                                   if (imageResp.isSuccessful()) {
-                                       // rebuild the vehicle list
-                                       if (imageResp.body() != null) {
-                                           state.newestLogEntry = getTimestampForEvent(v.entryNum)
-                                           state.positionImages.add(imageResp.body()!!)
-                                           Log.i("Position Image", "Found image: Entry: ${v.entryNum}, Camera: ${v.cameraId}, Angle: ${v.cameraAngle}")
-                                       }
-                                   }
-                               imageCount += 1
-                               // max 8 images
-                               if (imageCount >= 8) {
-                                   break
-                               }
-                                   //break // move on to the next camera
-                               //}
-                           }
-                        //}
+                        try {
+                            var imageCount = 0
+                            var lastEntry: Long = -1L
+                            for (v in state.positionViews.reversed()) {
+                                // Grab this image and move on to the next camera
+                                if (lastEntry == -1L || lastEntry == v.entryNum) {
+                                    val imageResp = api.getPositionImage(
+                                        v.vehicleId,
+                                        v.entryNum,
+                                        v.cameraId,
+                                        v.cameraAngle
+                                    )
+                                    if (imageResp.isSuccessful()) {
+                                        // rebuild the vehicle list
+                                        if (imageResp.body() != null) {
+                                            state.newestLogEntry = getTimestampForEvent(v.entryNum)
+                                            state.positionImages.add(imageResp.body()!!)
+                                            Log.i(
+                                                "Position Image",
+                                                "Found image: Entry: ${v.entryNum}, Camera: ${v.cameraId}, Angle: ${v.cameraAngle}"
+                                            )
+                                        }
+                                    }
+                                    imageCount += 1
+                                }
+                                // max 8 images, only the most recent positioning images, not prior
+                                if (imageCount >= 8 || (lastEntry != -1L && lastEntry != v.entryNum)) {
+                                    break
+                                }
+                                lastEntry = v.entryNum
+                            }
+                        } catch (e: Exception) {
+                            Log.e("Position View", "Error loading position views", e)
+                        }
+                    }
 
+                    try {
                         // Pull search hits as well
                         val shResp = api.getSearchHits(state.selectedVehicle, state.selectedSession)
                         if (shResp.isSuccessful()) {
@@ -400,7 +413,8 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                             while (currHit < 2 && currHit < hits.size) {
                                 val h = hits.get(currHit)
                                 // Retrieve the image for this hit
-                                val imgResp = api.getSearchHitImage(h.objectType, h.mapId, h.entryNum)
+                                val imgResp =
+                                    api.getSearchHitImage(h.objectType, h.mapId, h.entryNum)
                                 if (imgResp.isSuccessful()) {
                                     state.positionImages.add(imgResp.body()!!)
                                 }
@@ -408,6 +422,8 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                                 currHit++
                             }
                         }
+                    } catch (e: Exception) {
+                        Log.e("Search View", "Error loading search hit views", e)
                     }
 
                     mainActivity.hideProgressBar()
