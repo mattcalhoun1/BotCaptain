@@ -20,8 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import com.captain.services.navsvc.BotSession
 import com.captain.services.navsvc.Vehicle
-import com.captain.services.navsvc.BotCaptainEvents
-import com.captain.services.navsvc.BotCaptainState
+import com.captain.control.BotCaptainEvents
+import com.captain.control.BotCaptainState
 
 class VehicleSelectionComponents {
     @Composable

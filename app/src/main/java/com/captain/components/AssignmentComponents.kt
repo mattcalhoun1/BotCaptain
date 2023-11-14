@@ -25,8 +25,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import com.captain.services.navsvc.AssignmentDetails
-import com.captain.services.navsvc.BotCaptainEvents
-import com.captain.services.navsvc.BotCaptainState
+import com.captain.control.BotCaptainEvents
+import com.captain.control.BotCaptainState
 import kotlin.math.roundToInt
 
 class AssignmentComponents {

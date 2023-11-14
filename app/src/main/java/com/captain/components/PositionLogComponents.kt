@@ -13,9 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.modifier.modifierLocalConsumer
-import com.captain.services.navsvc.BotCaptainEvents
-import com.captain.services.navsvc.BotCaptainState
+import com.captain.control.BotCaptainEvents
+import com.captain.control.BotCaptainState
 import kotlin.math.roundToInt
 
 class PositionLogComponents {

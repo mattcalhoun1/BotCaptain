@@ -1,4 +1,4 @@
-package com.captain.services.navsvc
+package com.captain.control
 
 import android.content.Context
 import android.net.wifi.WifiManager
@@ -13,6 +13,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import android.text.format.Formatter
 import com.captain.MainActivity
+import com.captain.services.navsvc.Assignment
+import com.captain.services.navsvc.AssignmentDetails
+import com.captain.services.navsvc.AssignmentStep
+import com.captain.services.navsvc.NavSvc
+import com.captain.services.navsvc.SearchHit
 
 interface VehicleSelectionListener {
     fun vehicleSelected (vehicleId : String)
@@ -307,6 +312,9 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
                     // load appropriate map
                     getNavMap()
 
+                    // Load any lidar data from the session
+                    getLidarLog()
+
                     // trigger a ui update
                     positionLogLoaded()
                 }
@@ -332,6 +340,38 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
         }
     }
 
+    private fun getLidarLog () {
+        state.lidarLog.clear()
+        state.lidarMaps.clear()
+
+        if (!state.selectedVehicle.equals("") && !state.selectedSession.equals("")) {
+            val api = getNavSvcApi()
+
+            GlobalScope.launch(Dispatchers.IO) {
+                val response = api.getLidarEntries(state.selectedVehicle, state.selectedSession)
+                if (response.isSuccessful()) {
+                    // rebuild the vehicle list
+                    for (lle in response.body()!!) {
+                        state.lidarLog.add(lle)
+
+                        // attempt to load the entry for this one
+                        try {
+                            val mapResp = api.getLidarMap(
+                                state.selectedVehicle,
+                                state.selectedSession,
+                                lle.entryNum
+                            )
+                            if (mapResp.isSuccessful()) {
+                                state.lidarMaps.add(mapResp.body()!!)
+                            }
+                        } catch (e: Exception) {
+                            Log.e("Lidar", "Unable to load lidar map for entry: ${lle.entryNum}", e)
+                        }
+                    }
+                }
+            }
+        }
+    }
     private fun getPositionViews () {
         mainActivity.showProgressBar()
 

@@ -21,8 +21,8 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import com.captain.services.navsvc.SearchHitImage
-import com.captain.services.navsvc.BotCaptainEvents
-import com.captain.services.navsvc.BotCaptainState
+import com.captain.control.BotCaptainEvents
+import com.captain.control.BotCaptainState
 import com.captain.services.navsvc.PositionLogEntry
 import kotlin.math.roundToInt
 

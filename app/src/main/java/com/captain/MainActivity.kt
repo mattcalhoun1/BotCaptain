@@ -34,8 +34,10 @@ import com.captain.services.navsvc.PositionView
 import com.captain.services.navsvc.SearchHit
 import com.captain.services.navsvc.Searchable
 import com.captain.services.navsvc.Vehicle
-import com.captain.services.navsvc.BotCaptainEvents
-import com.captain.services.navsvc.BotCaptainState
+import com.captain.control.BotCaptainEvents
+import com.captain.control.BotCaptainState
+import com.captain.services.navsvc.LidarLogEntry
+import com.captain.services.navsvc.LidarMap
 import com.captain.ui.theme.BotCaptainTheme
 
 class MainActivity : ComponentActivity() {
@@ -80,6 +82,17 @@ class MainActivity : ComponentActivity() {
             }
         } catch(ex : Exception) {
             // can happen if app is waking up
+            // wait and try again
+            var success = false
+            while (!success) {
+                try {
+                    showProgress.value = false
+                    success = true
+                } catch (ex2: Exception) {
+                    // wait
+                    Thread.sleep(100)
+                }
+            }
         }
     }
 
@@ -92,6 +105,7 @@ class MainActivity : ComponentActivity() {
             }
         } catch(ex : Exception) {
             // can happen if app is waking up
+            showProgressState = false // otherwise it will get locked this way
         }
     }
 
@@ -137,7 +151,9 @@ class MainActivity : ComponentActivity() {
                 search = HashMap<String, Searchable>()),
             HashMap<String,NavMap>(),
             "",
-            ArrayList<AssignmentDetails>()
+            ArrayList<AssignmentDetails>(),
+            ArrayList<LidarLogEntry>(),
+            ArrayList<LidarMap>()
         )
     }
 }

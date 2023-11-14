@@ -10,19 +10,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98d8d35d-d75a-4f09-b50c-4e4c14bd7dd4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/services/navsvc/BotCaptainEvents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/services/navsvc/BotCaptainEvents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/components/AppComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/components/AppComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/components/AssignmentComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/components/AssignmentComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/components/BotViewComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/components/BotViewComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/components/NavMapComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/components/NavMapComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/components/PositionLogComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/components/PositionLogComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/components/TabComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/components/TabComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/components/VehicleSelectionComponents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/components/VehicleSelectionComponents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/services/navsvc/BotCaptainEvents.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/control/BotCaptainEvents.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/services/navsvc/BotCaptainState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/control/BotCaptainState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/captain/services/navsvc/NavSvc.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/captain/services/navsvc/NavSvc.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/home/matt/.android/avd/Pixel_3a_API_34_extension_level_7_x86_64.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[adb-R3CR40YL1BH-UPq4OO._adb-tls-connect._tcp]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Data Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,15 +61,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cidr.known.project.marker": "true",
+    "com.android.tools.idea.devicemanager.tab": "Physical"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/captain/control" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.captain.control" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="BotCaptain.app.main" />

@@ -49,4 +49,10 @@ interface NavSvc {
     @GET("/search_hit/{objectType}/{mapId}/{entryNum}/")
     suspend fun getSearchHitImage (@Path("objectType") objectType :String, @Path("mapId") mapId : String, @Path("entryNum") entryNum : Int) : Response<SearchHitImage>
 
+    @GET("/lidar_entries/{vehicleId}/{sessionId}/")
+    suspend fun getLidarEntries (@Path("vehicleId") vehicleId :String, @Path("sessionId") sessionId : String) : Response<List<LidarLogEntry>>
+
+    @GET("/lidar/{vehicleId}/{sessionId}/{entryNum}/")
+    suspend fun getLidarMap (@Path("vehicleId") vehicleId :String, @Path("sessionId") sessionId : String, @Path("entryNum") entryNum : Long) : Response<LidarMap>
+
 }

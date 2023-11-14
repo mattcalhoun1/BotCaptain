@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.captain.services.navsvc.BotCaptainEvents
+import com.captain.control.BotCaptainEvents
 
 class AppComponents {
     @Preview

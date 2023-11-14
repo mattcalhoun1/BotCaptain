@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
-import com.captain.services.navsvc.BotCaptainEvents
-import com.captain.services.navsvc.BotCaptainState
+import com.captain.control.BotCaptainEvents
+import com.captain.control.BotCaptainState
 import kotlinx.coroutines.launch
 
 class TabComponents {
@@ -50,6 +50,7 @@ class TabComponents {
                 title = "Tasks",
                 screen = { AssignmentComponents().AssignmentsContainer(botCaptainState = botCaptainState, eventHandler = eventHandler)}
             )
+
         )
         Column {
             TabRow(
