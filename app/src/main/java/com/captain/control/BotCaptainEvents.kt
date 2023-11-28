@@ -40,9 +40,9 @@ class BotCaptainEvents constructor (state : BotCaptainState, mainActivity: MainA
     // home wifi: "http://10.0.0.198:8000/"
     // mobile: "http://192.168.0.100:8000/"
     private val SERVICE_URLS = arrayListOf<String>(
-        "http://192.168.0.100:8000/", // mobile wifi
-        "http://10.0.0.199:8000/", // home wifi
-        //"http://10.0.0.122:8000/", // localhost when running on desktop
+        //"http://192.168.0.100:8000/", // mobile wifi
+        //"http://10.0.0.199:8000/", // home wifi
+        "http://10.0.0.122:8000/", // localhost when running on desktop
     )
     private var preloadPositionImages = true
 
