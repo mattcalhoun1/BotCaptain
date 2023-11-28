@@ -40,7 +40,7 @@ class AppComponents {
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.inversePrimary)
 
-            Button(content={ Text("Poweroff Network", fontWeight = fontWeight) }, colors= buttonColors, border = null, onClick = { eventHandler.shutdownMobileWifi() })
+            Button(content={ Text("Poweroff Network", fontWeight = fontWeight) }, colors= buttonColors, border = null, onClick = { eventHandler.shutdownMobileWifi() }, enabled = false)
         }
     }
 }
